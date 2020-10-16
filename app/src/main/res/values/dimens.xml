@@ -3,4 +3,5 @@
     <dimen name="standard_margin">30dp</dimen>
     <dimen name="thirty_two_margin">32dp</dimen>
     <dimen name="twenty_four_margin">24dp</dimen>
+    <dimen name="fifty_margin">50dp</dimen>
 </resources>

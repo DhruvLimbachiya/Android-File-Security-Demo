@@ -6,4 +6,6 @@
     <string name="email_text">Email</string>
     <string name="save_data_to_sharedpreference">Save Data to SharedPreference</string>
     <string name="retrieve_data_from_shared_preference">Retrieve Data from Shared Preference</string>
+    <string name="click_to_see_more_cryptography_text">Click to see more Cryptography</string>
+    <string name="enter_data_to_encrypt_hint">Enter data to encrypt</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.security.crypto.MasterKey;
 import androidx.security.crypto.MasterKeys;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.textcview);
+        textView = findViewById(R.id.textView);
         nameEditText = findViewById(R.id.name);
         emailEditText = findViewById(R.id.email);
 
@@ -168,5 +169,13 @@ public class MainActivity extends AppCompatActivity {
         nameEditText.setText(name);
         emailEditText.setText(email);
 
+    }
+
+    /**
+     * Navigate the user to [CryptographyActivity.class]
+     * @param view - Button
+     */
+    public void navigateToCryptoGraphyActivity(View view) {
+        startActivity(new Intent(this,CryptographyActivity.class));
     }
 }

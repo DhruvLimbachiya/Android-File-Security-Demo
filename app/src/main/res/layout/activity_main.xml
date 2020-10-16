@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/standard_margin"
+
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textcview"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -80,9 +81,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/thirty_two_margin"
-        android:textAllCaps="false"
         android:onClick="saveDataToSharedPreference"
         android:text="@string/save_data_to_sharedpreference"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_til" />
@@ -92,11 +93,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/thirty_two_margin"
-        android:textAllCaps="false"
         android:onClick="retrieveDataFromSharedPreference"
         android:text="@string/retrieve_data_from_shared_preference"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save_btn" />
+
+    <Button
+        android:id="@+id/navigationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:onClick="navigateToCryptoGraphyActivity"
+        android:layout_marginTop="@dimen/fifty_margin"
+        android:text="@string/click_to_see_more_cryptography_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
