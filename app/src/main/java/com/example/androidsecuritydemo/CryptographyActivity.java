@@ -24,11 +24,9 @@ import javax.crypto.spec.IvParameterSpec;
 
 public class CryptographyActivity extends AppCompatActivity {
 
-    private EditText dataEditText;
     private TextView encryptedDataTextView,decryptedDataTextView;
     private Cipher cipher;
     private SecretKey secretKey;
-    private byte[] initialVector;
     private  IvParameterSpec ivParams;
 
 
@@ -37,16 +35,16 @@ public class CryptographyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cryptography);
 
-        dataEditText =findViewById(R.id.dataToEncryptedEditText);
+        EditText dataEditText = findViewById(R.id.dataToEncryptedEditText);
         encryptedDataTextView = findViewById(R.id.encryptedDataTextView);
         decryptedDataTextView = findViewById(R.id.decryptedDataTextView);
 
         try {
-            cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING"); // Create an instance of a cipher algorithm.
+            cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING"); // Create an instance of a cipher of AES algorithm with CBC mode.
             SecureRandom secureRandom = new SecureRandom();
             byte[] iv = new byte[cipher.getBlockSize()];
             secureRandom.nextBytes(iv);
-            ivParams = new IvParameterSpec(iv);
+            ivParams = new IvParameterSpec(iv);  // Initial vector
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
@@ -60,8 +58,7 @@ public class CryptographyActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                byte[] plainText  = charSequence.toString().getBytes();
-
+                byte[] plainText  = charSequence.toString().getBytes();  // get the user entered data and convert into bytes
                 encryptData(plainText);
                 decryptData();
             }
@@ -73,7 +70,7 @@ public class CryptographyActivity extends AppCompatActivity {
         });
     }
 
-    byte[] cipherText;
+    byte[] cipherText; // variable for storing cipher text.
 
 
     /**
@@ -82,10 +79,10 @@ public class CryptographyActivity extends AppCompatActivity {
      */
     private void encryptData(byte[] plainText) {
         try {
-            cipher.init(Cipher.ENCRYPT_MODE,secretKey,ivParams);
-            cipherText = cipher.doFinal(plainText);
-            String cipherTextString = new String(cipherText);
-            encryptedDataTextView.setText(cipherTextString);
+            cipher.init(Cipher.ENCRYPT_MODE,secretKey,ivParams); // initialize cipher by specifying encrypt mode, key to use & initial vector
+            cipherText = cipher.doFinal(plainText); // encrypt plain text.
+            String cipherTextString = new String(cipherText); // convert byte array into user understandable string.
+            encryptedDataTextView.setText(cipherTextString); // display encrypted text.
 
         } catch (BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             e.printStackTrace();
@@ -94,10 +91,10 @@ public class CryptographyActivity extends AppCompatActivity {
 
     private void decryptData() {
         try {
-            cipher.init(Cipher.DECRYPT_MODE,secretKey, ivParams);// Create an instance of a cipher algorithm.
-            byte[] plainText = cipher.doFinal(cipherText);
-            String plainTextString = new String(plainText);
-            decryptedDataTextView.setText(plainTextString);
+            cipher.init(Cipher.DECRYPT_MODE,secretKey, ivParams);// initialize cipher by specifying decrypt mode, key to use & initial vector
+            byte[] plainText = cipher.doFinal(cipherText); // decrypt plain text.
+            String plainTextString = new String(plainText); // convert byte array into user understandable string.
+            decryptedDataTextView.setText(plainTextString); // display decrypted text.
         } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
             e.printStackTrace();
         }
@@ -108,15 +105,10 @@ public class CryptographyActivity extends AppCompatActivity {
      */
     private void encryptionConfiguration() {
         try {
-
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES"); // Create a system for generating keys
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES"); // Create a system for generating keys.
             keyGenerator.init(256); // Generate key of 256 bits size.
 
             secretKey = keyGenerator.generateKey(); // Generate a secret(private) key using generator(keyGenerator) instance.
-
-
-            initialVector = cipher.getIV();
-
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
